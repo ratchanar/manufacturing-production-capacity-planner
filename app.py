@@ -65,7 +65,7 @@ def records_to_df(records, columns):
 
 
 # -----------------------------
-# Defaults derived from the PPT
+# Defaults derived
 # -----------------------------
 def default_state():
     products = pd.DataFrame([
@@ -294,7 +294,7 @@ def optimize_plan(products, machines, routing, demand, weeks, allow_shortage=Tru
 
 def teaching_calc(products, demand, weeks):
     req = required_production_table(products, demand, weeks)
-    # Use the slide's basic requirement formula, independent of capacity.
+    # Use basic requirement formula, independent of capacity.
     return req
 
 
@@ -381,7 +381,7 @@ with tab_setup:
 
 with tab_demand:
     st.subheader("Demand, Inventory & Safety Stock")
-    st.caption("The PPT distinguishes Forecast Demand from Actual Demand and uses inventory as the bridge between demand and production. Page 6 uses Forecast Demand + Desired Closing Inventory − Opening Inventory for basic production requirement.")
+    st.caption("Forecast Demand is different from Actual Demand and uses inventory as the bridge between demand and production. Forecast Demand + Desired Closing Inventory − Opening Inventory for basic production requirement.")
     new_demand = st.data_editor(demand, num_rows="dynamic", use_container_width=True, key="demand_editor")
     if st.button("Apply demand & inventory inputs", type="primary"):
         state["demand"] = df_to_records(new_demand)
@@ -396,7 +396,7 @@ with tab_demand:
 
 with tab_routing:
     st.subheader("Product–Machine Routing")
-    st.caption("Enter machine-hours required per unit. A product may use several machines, exactly as illustrated in the routing table on page 7 of the PPT.")
+    st.caption("Enter machine-hours required per unit. A product may use several machines.")
     new_routing = st.data_editor(routing, num_rows="dynamic", use_container_width=True, key="routing_editor")
     if st.button("Apply routing"):
         state["routing"] = df_to_records(new_routing)
@@ -444,7 +444,7 @@ with tab_calc:
 
 with tab_opt:
     st.subheader("Optimised Production Plan")
-    st.caption("The PPT frames production quantity as the decision variable and recommends Solver-style optimisation subject to machine capacity, production limits, inventory/safety stock and material limits.")
+    st.caption("The production quantity is the decision variable and we recommend Solver-style optimisation subject to machine capacity, production limits, inventory/safety stock and material limits.")
     c1,c2,c3 = st.columns(3)
     with c1:
         allow_shortage = st.checkbox("Allow shortage with penalty", value=True)
@@ -504,8 +504,8 @@ with tab_opt:
 
 with tab_whatif:
     st.subheader("What-If Analysis")
-    st.caption("The PPT explicitly proposes demand +20%, capacity −20%, overtime +100 hours, machine breakdown and raw-material constraint scenarios.")
-    scenario = st.selectbox("Choose a teaching scenario", [
+    st.caption("We propose demand +20%, capacity −20%, overtime +100 hours, machine breakdown and raw-material constraint scenarios.")
+    scenario = st.selectbox("Choose a scenario", [
         "Base case", "Demand +20%", "Machine capacity -20%", "Overtime +100 hours", "Raw material stress", "Combined stress"
     ])
     if scenario == "Base case":
@@ -547,7 +547,7 @@ with tab_whatif:
 with tab_save:
     st.subheader("Save, Load & Export")
     st.write("The app saves scenarios locally in **manufacturing_planner.db** when you click Save. This means your entered values do not disappear when you close and reopen the local app.")
-    scenario_name=st.text_input("Scenario name", value=f"Classroom Scenario {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+    scenario_name=st.text_input("Scenario name", value=f"Scenario {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     current_state=make_state(products,machines,routing,demand,weeks)
     if st.button("💾 Save scenario to local database", type="primary"):
         save_scenario(scenario_name,current_state)
@@ -565,8 +565,8 @@ with tab_save:
         ("Demand CSV",demand,"demand.csv")]:
         st.download_button(label,df.to_csv(index=False),file_name=fn,mime="text/csv",key="dl_"+fn)
 
-    st.markdown("### Classroom explanation sequence")
+    st.markdown("### Explanation sequence")
     st.markdown("1. Enter **Forecast Demand** and **Actual Demand**.  2. Explain opening inventory and safety stock.  3. Calculate production requirement.  4. Show routing and machine-hours.  5. Calculate capacity utilisation and gap.  6. Identify the bottleneck.  7. Run optimisation.  8. Change one assumption in What-If and ask students: **What should management change, and why?**")
 
 st.divider()
-st.caption("Built directly around the uploaded Production & Capacity Planning concepts: demand, inventory, production requirement, routing, machine capacity, utilisation, bottleneck, quality, priority, cost, raw-material constraints, optimisation and what-if analysis. The PPT's final objective is a defensible production decision supported by calculations.")
+st.caption("Built directly around the uploaded Production & Capacity Planning concepts: demand, inventory, production requirement, routing, machine capacity, utilisation, bottleneck, quality, priority, cost, raw-material constraints, optimisation and what-if analysis. The final objective is a defensible production decision supported by calculations.")
