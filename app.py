@@ -454,7 +454,7 @@ with tab_opt:
         capacity_scale = st.slider("Capacity multiplier", 0.50, 1.20, 1.00, 0.05)
     extra_ot = st.number_input("Extra overtime available per machine (hours)", min_value=0.0, value=0.0, step=10.0)
 
-    if st.button("🚀 Run optimisation", type="primary"):
+    if st.button("Run optimisation", type="primary"):
         result = optimize_plan(products, machines, routing, demand, weeks, allow_shortage,
                                demand_scale, capacity_scale, extra_ot)
         st.session_state.opt_result = result
