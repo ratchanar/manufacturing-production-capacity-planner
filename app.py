@@ -11,7 +11,7 @@ from scipy.optimize import linprog
 APP_DIR = Path(__file__).resolve().parent
 DB_PATH = APP_DIR / "manufacturing_planner.db"
 
-st.set_page_config(page_title="Production & Capacity Planner", page_icon="🏭", layout="wide")
+st.set_page_config(page_title="Production & Capacity Planner", layout="wide")
 
 # -----------------------------
 # Database / persistence
@@ -311,7 +311,7 @@ if "state" not in st.session_state:
 # Sidebar
 # -----------------------------
 st.sidebar.title("🏭 Production Planner")
-st.sidebar.caption("Dynamic classroom planning model based on the uploaded Production & Capacity Planning PPT.")
+st.sidebar.caption("Dynamic manufacturing planning model based on Production & Capacity Planning.")
 
 with st.sidebar.expander("Load a saved scenario", expanded=False):
     saved = load_scenarios()
@@ -333,7 +333,7 @@ weeks = state.get("weeks", sorted(demand.Week.astype(str).unique().tolist()))
 
 st.title("Production & Capacity Planning Simulator")
 st.markdown("**Demand → Inventory → Production Requirement → Machine Capacity → Feasible Plan → Management Decision**")
-st.info("This is a teaching decision tool, not a decorative dashboard. Enter your own values, calculate the plan, optimise it, test scenarios, and explain why the recommendation changes.")
+st.info("This is a manufacturing decision tool. Enter your own values, calculate the plan, optimise it, test scenarios, and explain why the recommendation changes.")
 
 # -----------------------------
 # Tabs
