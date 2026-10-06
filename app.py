@@ -374,7 +374,7 @@ with tab_setup:
         st.session_state.state = state
         st.rerun()
 
-    st.markdown("### Teaching assumptions from the slides")
+    st.markdown("### Assumptions")
     st.write("• Safety stock is typically demonstrated as about **20% of Forecast Demand** (editable per week/product).")
     st.write("• Available hours = (Base capacity − Downtime) × Efficiency, with overtime added separately in optimisation.")
     st.write("• Defective units = Actual/Planned Production × Defect Rate; Good Units = Production − Defective Units.")
