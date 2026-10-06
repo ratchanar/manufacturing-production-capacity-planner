@@ -310,7 +310,7 @@ if "state" not in st.session_state:
 # -----------------------------
 # Sidebar
 # -----------------------------
-st.sidebar.title("🏭 Production Planner")
+st.sidebar.title("Production Planner")
 st.sidebar.caption("Dynamic manufacturing planning model based on Production & Capacity Planning.")
 
 with st.sidebar.expander("Load a saved scenario", expanded=False):
